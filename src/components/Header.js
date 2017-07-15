@@ -8,7 +8,7 @@ export default class Header extends Component {
       <div className="Header">
         <div className="App-header">
           <img src={logo} className="Header-logo" alt="logo" />
-          <h4>Welcome to Social poll</h4>
+          <h4>Social Poll</h4>
         </div>
       </div>
     );
