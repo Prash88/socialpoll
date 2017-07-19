@@ -1,3 +1,9 @@
 .App-intro {
   font-size: large;
 }
+
+.footer { /* Increased specificity for SO snippet priority */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
