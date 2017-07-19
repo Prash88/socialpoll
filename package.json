@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "auth0-lock": "^10.19.0",
+    "flow-bin": "^0.50.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.2",
+    "prettier": "^1.5.3",
     "react": "^15.6.1",
     "react-apollo": "^1.4.4",
     "react-dom": "^15.6.1",
@@ -14,10 +18,18 @@
     "semantic-ui-react": "^0.71.0",
     "tachyons": "^4.7.4"
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   }
 }

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import logo from '../images/logo.svg';
 import '../css/Header.css';
@@ -9,12 +10,20 @@ class Header extends Component {
     return (
       <Menu>
         <Menu.Menu>
-          <Menu.Item onClick={() => {this.props.history.push(`/`);}}>
+          <Menu.Item
+            onClick={() => {
+              this.props.history.push(`/`);
+            }}
+          >
             Social Poll <img src={logo} alt="logo" className="Header-logo" />
           </Menu.Item>
         </Menu.Menu>
         <Menu.Menu position="right">
-          <Menu.Item onClick={() => {this.props.history.push(`/signup`);}}>
+          <Menu.Item
+            onClick={() => {
+              this.props.history.push(`/signup`);
+            }}
+          >
             Sign Up
           </Menu.Item>
         </Menu.Menu>

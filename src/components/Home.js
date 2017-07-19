@@ -1,9 +1,9 @@
+// @flow
 import React from 'react';
 
-const Home = () => (
-  <div className='alignCenter'>
+const Home = () =>
+  <div className="alignCenter">
     <h1>Welcome to the Social Poll Website!</h1>
-  </div>
-)
+  </div>;
 
 export default Home;
