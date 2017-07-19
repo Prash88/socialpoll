@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignUp = () => (
-  <div>
+  <div className='alignCenter'>
     <h1>Sign Up page</h1>
   </div>
 )
