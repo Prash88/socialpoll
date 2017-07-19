@@ -7,3 +7,11 @@
   bottom: 0;
   width: 100%;
 }
+
+.alignCenter {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
