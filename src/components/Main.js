@@ -6,8 +6,8 @@ import Login from './Login.js';
 
 const Main = () =>
   <div>
-    <Route exact path="/" component={Login} />
-    <Route path="/signup" component={SignUp} />
+    <Route exact path={process.env.PUBLIC_URL + '/'} component={Login} />
+    <Route path={process.env.PUBLIC_URL + '/signup'} component={SignUp} />
   </div>;
 
 export default Main;
