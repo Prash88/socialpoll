@@ -17,9 +17,6 @@ class Header extends Component {
           <Menu.Item onClick={() => {this.props.history.push(`/signup`);}}>
             Sign Up
           </Menu.Item>
-          <Menu.Item onClick={() => {this.props.history.push(`/login`);}}>
-            Login
-          </Menu.Item>
         </Menu.Menu>
       </Menu>
     );

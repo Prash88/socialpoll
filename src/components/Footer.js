@@ -10,8 +10,6 @@ const Footer = () => (
       <List floated='right' horizontal>
         <List.Item disabled href='#'>© Hokage, Inc.</List.Item>
         <List.Item><Link to='/'>Home</Link></List.Item>
-        <List.Item><Link to='/login'>Login</Link></List.Item>
-        <List.Item><Link to='/SignUp'>SignUp</Link></List.Item>
       </List>
     </Container>
   </div>

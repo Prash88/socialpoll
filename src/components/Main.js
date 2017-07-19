@@ -5,13 +5,10 @@ import SignUp from './SignUp.js';
 import Login from './Login.js';
 
 const Main = () => (
-  <main>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route exact path='/signup' component={SignUp}/>
-      <Route exact path='/login' component={Login}/>
-    </Switch>
-  </main>
+    <div>
+      <Route exact path='/' component={Login}/>
+      <Route path='/signup' component={SignUp}/>
+    </div>
 )
 
 export default Main;
