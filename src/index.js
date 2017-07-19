@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import {
   ApolloClient,
   ApolloProvider,
@@ -39,9 +39,9 @@ const client = new ApolloClient({ networkInterface });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </ApolloProvider>,
   document.getElementById('root')
 );

@@ -2,9 +2,11 @@
   "name": "socialpoll",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://prash88.github.io/socialpoll",
   "dependencies": {
     "auth0-lock": "^10.19.0",
     "flow-bin": "^0.50.0",
+    "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
@@ -25,6 +27,8 @@
     ]
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
