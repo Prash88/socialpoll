@@ -75,20 +75,6 @@ class Header extends Component {
   }
 
   logOutItem() {
-    const options = [
-      {
-        key: 'user',
-        text: (
-          <span>
-            Signed in as <strong>{this.props.data.user.name}</strong>
-          </span>
-        ),
-        disabled: true
-      },
-      { key: 'profile', text: 'Your Profile', onClick: () => {} },
-      { key: 'settings', text: 'Settings', onClick: () => {} },
-      { key: 'sign-out', text: 'Sign Out', onClick: this._logout }
-    ];
     const trigger = (
       <div>
         <Image src={avatar} avatar />
@@ -99,12 +85,32 @@ class Header extends Component {
     );
     return (
       <Menu.Item>
-        <Dropdown
-          trigger={trigger}
-          options={options}
-          pointing="top right"
-          icon={null}
-        />
+        <Dropdown trigger={trigger} pointing="top right" icon={null}>
+          <Dropdown.Menu>
+            <Dropdown.Header
+              content={
+                <span>
+                  Signed in as <strong>{this.props.data.user.name}</strong>
+                </span>
+              }
+            />
+            <Dropdown.Item
+              key={'profile'}
+              text={'Your Profile'}
+              onClick={() => {}}
+            />
+            <Dropdown.Item
+              key={'settings'}
+              text={'Settings'}
+              onClick={() => {}}
+            />
+            <Dropdown.Item
+              key={'sign-out'}
+              text={'Sign Out'}
+              onClick={this._logout}
+            />
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu.Item>
     );
   }
