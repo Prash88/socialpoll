@@ -1,9 +1,14 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 
-const Home = () =>
-  <div className="alignCenter">
-    <h1>Welcome to the Social Poll Website!</h1>
-  </div>;
+class Home extends Component {
+  render() {
+    return (
+      <div className="alignCenter">
+        <h1>Welcome to the Social Poll Website!</h1>
+      </div>
+    );
+  }
+}
 
 export default Home;
