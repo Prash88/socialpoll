@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Home from './Home.js';
+import App from './App.js';
 
 const Routes = () =>
   <div>
-    <Route exact path={process.env.PUBLIC_URL + '/'} component={Home} />
+    <Route exact path={process.env.PUBLIC_URL + '/'} component={App} />
   </div>;
 
 export default Routes;

@@ -5,6 +5,7 @@ import '../css/Header.css';
 import { Menu } from 'semantic-ui-react';
 import { graphql, gql } from 'react-apollo';
 import Auth0Lock from 'auth0-lock';
+import Home from './Home.js';
 
 const clientId = 'GAbreu5mFYaHusGFGuCTBPVOtaeN77qz';
 const domain = 'prash88.auth0.com';
@@ -90,22 +91,33 @@ class Header extends Component {
     }
   }
 
+  getGetHomeItem() {
+    if (!this._isLoggedIn()) {
+      return <Home userName={''} />;
+    } else {
+      return <Home userName={this.props.data.user.name} />;
+    }
+  }
+
   render() {
     return (
-      <Menu>
-        <Menu.Menu>
-          <Menu.Item
-            onClick={() => {
-              this.props.history.push(process.env.PUBLIC_URL + '/');
-            }}
-          >
-            Social Poll <img src={logo} alt="logo" className="Header-logo" />
-          </Menu.Item>
-        </Menu.Menu>
-        <Menu.Menu position="right">
-          {this.getMenuItem()}
-        </Menu.Menu>
-      </Menu>
+      <div>
+        <Menu>
+          <Menu.Menu>
+            <Menu.Item
+              onClick={() => {
+                this.props.history.push(process.env.PUBLIC_URL + '/');
+              }}
+            >
+              Social Poll <img src={logo} alt="logo" className="Header-logo" />
+            </Menu.Item>
+          </Menu.Menu>
+          <Menu.Menu position="right">
+            {this.getMenuItem()}
+          </Menu.Menu>
+        </Menu>
+        {this.getGetHomeItem()}
+      </div>
     );
   }
 }
@@ -132,6 +144,7 @@ const userQuery = gql`
   query userQuery {
     user {
       id
+      name
     }
   }
 `;
