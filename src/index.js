@@ -37,6 +37,8 @@ networkInterface.use([
 
 const client = new ApolloClient({ networkInterface });
 
+registerServiceWorker();
+
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
@@ -47,5 +49,3 @@ ReactDOM.render(
   </ApolloProvider>,
   document.getElementById('root')
 );
-
-registerServiceWorker();

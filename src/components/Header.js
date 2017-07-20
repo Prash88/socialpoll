@@ -12,7 +12,7 @@ class Header extends Component {
         <Menu.Menu>
           <Menu.Item
             onClick={() => {
-              this.props.history.push(`/`);
+              this.props.history.push(process.env.PUBLIC_URL + '/');
             }}
           >
             Social Poll <img src={logo} alt="logo" className="Header-logo" />
@@ -21,7 +21,7 @@ class Header extends Component {
         <Menu.Menu position="right">
           <Menu.Item
             onClick={() => {
-              this.props.history.push(`/signup`);
+              this.props.history.push(process.env.PUBLIC_URL + '/signup');
             }}
           >
             Sign Up

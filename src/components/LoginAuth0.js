@@ -46,11 +46,13 @@ class LoginAuth0 extends Component {
       this.props
         .createUser({ variables })
         .then(response => {
-          this.props.history.replace('/');
+          this.props.history.replace(process.env.PUBLIC_URL + '/');
+          window.location.reload();
         })
         .catch(e => {
           console.error(e);
-          this.props.history.replace('/');
+          this.props.history.replace(process.env.PUBLIC_URL + '/');
+          window.location.reload();
         });
     });
   }

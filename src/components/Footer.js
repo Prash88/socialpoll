@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () =>
   <div className="footer">
+    <div>process.env.PUBLIC_URL</div>
     <Divider />
     <Container textAlign="center">
       <List floated="right" horizontal>
@@ -13,7 +14,7 @@ const Footer = () =>
           © Hokage, Inc.
         </List.Item>
         <List.Item>
-          <Link to="/">Home</Link>
+          <Link to={process.env.PUBLIC_URL + '/'}>Home</Link>
         </List.Item>
       </List>
     </Container>
