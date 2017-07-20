@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 const Footer = () =>
   <div className="footer">
-    <div>process.env.PUBLIC_URL</div>
     <Divider />
     <Container textAlign="center">
       <List floated="right" horizontal>

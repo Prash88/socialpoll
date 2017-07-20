@@ -26,34 +26,31 @@ class LoginAuth0 extends Component {
   componentDidMount() {
     this._lock.on('authenticated', authResult => {
       window.localStorage.setItem('auth0IdToken', authResult.idToken);
-      this._lock.getUserInfo(authResult.accessToken, function(error, profile) {
+      this._lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
           // Handle error
           return;
         }
-        window.localStorage.setItem('name ', profile.name);
-        window.localStorage.setItem('email', profile.email);
         // Update DOM
+        const variables = {
+          idToken: window.localStorage.getItem('auth0IdToken'),
+          emailAddress: profile.email,
+          name: profile.name,
+          emailSubscription: true
+        };
+
+        this.props
+          .createUser({ variables })
+          .then(response => {
+            this.props.history.replace(process.env.PUBLIC_URL + '/');
+            window.location.reload();
+          })
+          .catch(e => {
+            this.props.history.replace(process.env.PUBLIC_URL + '/');
+            window.location.reload();
+          });
       });
       //this.props.history.push(`/signup`)
-      const variables = {
-        idToken: window.localStorage.getItem('auth0IdToken'),
-        emailAddress: window.localStorage.getItem('email'),
-        name: window.localStorage.getItem('name'),
-        emailSubscription: true
-      };
-
-      this.props
-        .createUser({ variables })
-        .then(response => {
-          this.props.history.replace(process.env.PUBLIC_URL + '/');
-          window.location.reload();
-        })
-        .catch(e => {
-          console.error(e);
-          this.props.history.replace(process.env.PUBLIC_URL + '/');
-          window.location.reload();
-        });
     });
   }
 

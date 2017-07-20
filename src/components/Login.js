@@ -18,10 +18,7 @@ class Login extends Component {
   props: Props;
 
   _logout = () => {
-    // remove token from local storage and reload page to reset apollo client
     window.localStorage.removeItem('auth0IdToken');
-    window.localStorage.removeItem('name');
-    window.localStorage.removeItem('email');
     window.location.reload();
   };
 
@@ -40,7 +37,6 @@ class Login extends Component {
   }
 
   renderLoggedOut() {
-    //<Button primary size='huge' onClick={() => {}}>Login</Button>
     return (
       <div className="alignCenter">
         <LoginAuth0 clientId={clientId} domain={domain} />
