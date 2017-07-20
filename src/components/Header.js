@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import logo from '../images/logo.svg';
+import avatar from '../images/avatar.jpg';
 import '../css/Header.css';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Image, Dropdown } from 'semantic-ui-react';
 import { graphql, gql } from 'react-apollo';
 import Auth0Lock from 'auth0-lock';
 import Home from './Home.js';
@@ -74,7 +75,38 @@ class Header extends Component {
   }
 
   logOutItem() {
-    return <Menu.Item onClick={this._logout}>Log Out</Menu.Item>;
+    const options = [
+      {
+        key: 'user',
+        text: (
+          <span>
+            Signed in as <strong>{this.props.data.user.name}</strong>
+          </span>
+        ),
+        disabled: true
+      },
+      { key: 'profile', text: 'Your Profile', onClick: () => {} },
+      { key: 'settings', text: 'Settings', onClick: () => {} },
+      { key: 'sign-out', text: 'Sign Out', onClick: this._logout }
+    ];
+    const trigger = (
+      <div>
+        <Image src={avatar} avatar />
+        <span>
+          {this.props.data.user.name}
+        </span>
+      </div>
+    );
+    return (
+      <Menu.Item>
+        <Dropdown
+          trigger={trigger}
+          options={options}
+          pointing="top right"
+          icon={null}
+        />
+      </Menu.Item>
+    );
   }
 
   loadingItem() {
