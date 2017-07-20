@@ -65,7 +65,6 @@ class Header extends Component {
   };
 
   _isLoggedIn = () => {
-    console.log(this.props.data.user);
     return this.props.data.user;
   };
 
@@ -133,7 +132,6 @@ const userQuery = gql`
   query userQuery {
     user {
       id
-      name
     }
   }
 `;
