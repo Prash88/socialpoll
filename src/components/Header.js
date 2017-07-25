@@ -6,14 +6,18 @@ import '../css/Header.css';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
 import { graphql, gql } from 'react-apollo';
 import Auth0Lock from 'auth0-lock';
-import Home from './Home.js';
+import Routes from './Routes';
+import { withRouter } from 'react-router-dom';
 
 const clientId = 'GAbreu5mFYaHusGFGuCTBPVOtaeN77qz';
 const domain = 'prash88.auth0.com';
 
 type Props = {
   data: Object,
-  createUser: Function
+  createUser: Function,
+  match: Object,
+  location: Object,
+  history: Object
 };
 
 type State = {};
@@ -63,6 +67,7 @@ class Header extends Component {
 
   _logout = () => {
     window.localStorage.removeItem('auth0IdToken');
+    this.props.history.push(process.env.PUBLIC_URL + '/');
     this.props.data.refetch();
   };
 
@@ -97,12 +102,16 @@ class Header extends Component {
             <Dropdown.Item
               key={'profile'}
               text={'Your Profile'}
-              onClick={() => {}}
+              onClick={() => {
+                this.props.history.push(process.env.PUBLIC_URL + '/profile');
+              }}
             />
             <Dropdown.Item
               key={'settings'}
               text={'Settings'}
-              onClick={() => {}}
+              onClick={() => {
+                this.props.history.push(process.env.PUBLIC_URL + '/settings');
+              }}
             />
             <Dropdown.Item
               key={'sign-out'}
@@ -129,14 +138,6 @@ class Header extends Component {
     }
   }
 
-  getGetHomeItem() {
-    if (!this._isLoggedIn()) {
-      return <Home userName={''} />;
-    } else {
-      return <Home userName={this.props.data.user.name} />;
-    }
-  }
-
   render() {
     return (
       <div>
@@ -154,7 +155,7 @@ class Header extends Component {
             {this.getMenuItem()}
           </Menu.Menu>
         </Menu>
-        {this.getGetHomeItem()}
+        <Routes user={this.props.data.user} />
       </div>
     );
   }
@@ -183,10 +184,14 @@ const userQuery = gql`
     user {
       id
       name
+      emailAddress
+      emailSubscription
     }
   }
 `;
 
 export default graphql(createUser, { name: 'createUser' })(
-  graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(Header)
+  graphql(userQuery, { options: { fetchPolicy: 'network-only' } })(
+    withRouter(Header)
+  )
 );

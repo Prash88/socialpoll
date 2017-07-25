@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.css';
-import Routes from './components/Routes';
+import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import {
@@ -43,7 +43,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
       <Switch>
-        <Routes />
+        <App />
       </Switch>
     </BrowserRouter>
   </ApolloProvider>,
