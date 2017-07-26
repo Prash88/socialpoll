@@ -58,6 +58,18 @@ class Profile extends Component {
     });
   }
 
+  checkEnabled() {
+    if (
+      this.state.name === this.props.user.name &&
+      this.state.email === this.props.user.emailAddress &&
+      !this.state.emailSubscription === this.props.user.emailSubscription
+    ) {
+      this.setState({ saveEnabled: false });
+    } else {
+      this.setState({ saveEnabled: true });
+    }
+  }
+
   render() {
     return (
       <div className="alignCenter">
@@ -69,10 +81,8 @@ class Profile extends Component {
               placeholder="First Name"
               value={this.state.name}
               onChange={e => {
-                if (e.target.value !== this.props.user.name) {
-                  this.setState({ saveEnabled: true });
-                }
                 this.setState({ name: e.target.value });
+                this.checkEnabled();
               }}
             />
           </Form.Field>
@@ -82,10 +92,8 @@ class Profile extends Component {
               placeholder="Last Name"
               value={this.state.email}
               onChange={e => {
-                if (e.target.value !== this.props.user.emailAddress) {
-                  this.setState({ saveEnabled: true });
-                }
                 this.setState({ email: e.target.value });
+                this.checkEnabled();
               }}
             />
           </Form.Field>
@@ -94,10 +102,8 @@ class Profile extends Component {
               label="I agree to the Email Subscription"
               checked={this.state.emailSubscription}
               onChange={(e, data) => {
-                if (data.checked !== this.props.user.emailSubscription) {
-                  this.setState({ saveEnabled: true });
-                }
                 this.setState({ emailSubscription: data.checked });
+                this.checkEnabled();
               }}
             />
           </Form.Field>
