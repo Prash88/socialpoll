@@ -12,7 +12,8 @@ type State = {
   name: string,
   email: string,
   emailSubscription: boolean,
-  id: string
+  id: string,
+  saveEnabled: boolean
 };
 
 class Profile extends Component {
@@ -25,15 +26,12 @@ class Profile extends Component {
       name: props.user ? props.user.name : '',
       email: props.user ? props.user.emailAddress : '',
       emailSubscription: props.user ? props.user.emailSubscription : false,
-      id: props.user ? props.user.id : ''
+      id: props.user ? props.user.id : '',
+      saveEnabled: false
     };
   }
 
   _onSubmit() {
-    //console.log(this.state.name);
-    //console.log(this.state.email);
-    //console.log(this.state.emailSubscription);
-    //console.log(this.state.id);
     const variables = {
       id: this.state.id,
       emailAddress: this.state.email,
@@ -71,6 +69,9 @@ class Profile extends Component {
               placeholder="First Name"
               value={this.state.name}
               onChange={e => {
+                if (e.target.value !== this.props.user.name) {
+                  this.setState({ saveEnabled: true });
+                }
                 this.setState({ name: e.target.value });
               }}
             />
@@ -81,6 +82,9 @@ class Profile extends Component {
               placeholder="Last Name"
               value={this.state.email}
               onChange={e => {
+                if (e.target.value !== this.props.user.emailAddress) {
+                  this.setState({ saveEnabled: true });
+                }
                 this.setState({ email: e.target.value });
               }}
             />
@@ -90,11 +94,18 @@ class Profile extends Component {
               label="I agree to the Email Subscription"
               checked={this.state.emailSubscription}
               onChange={(e, data) => {
+                if (data.checked !== this.props.user.emailSubscription) {
+                  this.setState({ saveEnabled: true });
+                }
                 this.setState({ emailSubscription: data.checked });
               }}
             />
           </Form.Field>
-          <Button type="submit" onClick={this._onSubmit.bind(this)}>
+          <Button
+            type="submit"
+            disabled={!this.state.saveEnabled}
+            onClick={this._onSubmit.bind(this)}
+          >
             Save
           </Button>
         </Form>
