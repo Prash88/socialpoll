@@ -1,10 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import AuthRoute from './AuthRoute';
 import Home from './Home';
 import Profile from './Profile';
 import Settings from './Settings';
+import NotFound from './NotFound';
 
 type Props = {
   user: Object,
@@ -19,13 +20,14 @@ class Routes extends Component {
 
   render() {
     return (
-      <div>
+      <Switch>
         <Route
           exact
           path={process.env.PUBLIC_URL + '/'}
           render={defaultProps =>
             <Home {...defaultProps} user={this.props.user} />}
         />
+        <Route exact path="/404" component={NotFound} />
         <AuthRoute
           history={this.props.history}
           path={process.env.PUBLIC_URL + '/profile'}
@@ -36,7 +38,8 @@ class Routes extends Component {
           path={process.env.PUBLIC_URL + '/settings'}
           component={Settings}
         />
-      </div>
+        <Redirect to="/404" push />
+      </Switch>
     );
   }
 }

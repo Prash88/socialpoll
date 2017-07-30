@@ -2,7 +2,8 @@
   font-size: large;
 }
 
-.footer { /* Increased specificity for SO snippet priority */
+.footer {
+  /* Increased specificity for SO snippet priority */
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -12,6 +13,13 @@
   margin: 0;
   position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.alignCenterHorizontal {
+  margin: 0;
+  position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
 }
