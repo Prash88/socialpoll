@@ -1,15 +1,13 @@
 // @flow
 import React, { Component } from 'react';
 import '../css/App.css';
-import Header from './Header.js';
-import Footer from './Footer.js';
+import Routes from './Routes';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <Footer />
+        <Routes />
       </div>
     );
   }

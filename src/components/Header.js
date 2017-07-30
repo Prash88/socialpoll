@@ -6,7 +6,6 @@ import '../css/Header.css';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
 import { graphql, gql } from 'react-apollo';
 import Auth0Lock from 'auth0-lock';
-import Routes from './Routes';
 import { withRouter } from 'react-router-dom';
 
 const clientId = 'GAbreu5mFYaHusGFGuCTBPVOtaeN77qz';
@@ -155,7 +154,6 @@ class Header extends Component {
             {this.getMenuItem()}
           </Menu.Menu>
         </Menu>
-        <Routes user={this.props.data.user} />
       </div>
     );
   }

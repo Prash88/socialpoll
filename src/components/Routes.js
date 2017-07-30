@@ -1,26 +1,44 @@
 // @flow
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
+import AuthRoute from './AuthRoute';
 import Home from './Home';
 import Profile from './Profile';
 import Settings from './Settings';
 
-const Routes = (props: any) =>
-  <div>
-    <Route
-      exact
-      path={process.env.PUBLIC_URL + '/'}
-      render={defaultProps => <Home {...defaultProps} user={props.user} />}
-    />
-    <Route
-      path={process.env.PUBLIC_URL + '/profile'}
-      render={defaultProps => <Profile {...defaultProps} user={props.user} />}
-    />
-    <Route
-      exact
-      path={process.env.PUBLIC_URL + '/settings'}
-      render={defaultProps => <Settings {...defaultProps} user={props.user} />}
-    />
-  </div>;
+type Props = {
+  user: Object,
+  updateUser: Function
+};
 
-export default Routes;
+type State = {};
+
+class Routes extends Component {
+  props: Props;
+  state: State;
+
+  render() {
+    return (
+      <div>
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + '/'}
+          render={defaultProps =>
+            <Home {...defaultProps} user={this.props.user} />}
+        />
+        <AuthRoute
+          history={this.props.history}
+          path={process.env.PUBLIC_URL + '/profile'}
+          component={Profile}
+        />
+        <AuthRoute
+          history={this.props.history}
+          path={process.env.PUBLIC_URL + '/settings'}
+          component={Settings}
+        />
+      </div>
+    );
+  }
+}
+
+export default withRouter(Routes);
