@@ -58,15 +58,48 @@ class Profile extends Component {
     });
   }
 
-  checkEnabled() {
+  nameChange(e) {
+    const name = e.target.value;
+    if (
+      name === this.props.user.name &&
+      this.state.email === this.props.user.emailAddress &&
+      this.state.emailSubscription === this.props.user.emailSubscription
+    ) {
+      this.setState({ saveEnabled: false, name: name });
+    } else {
+      this.setState({ saveEnabled: true, name: name });
+    }
+  }
+
+  emailChange(e) {
+    const email = e.target.value;
+    if (
+      this.state.name === this.props.user.name &&
+      email === this.props.user.emailAddress &&
+      this.state.emailSubscription === this.props.user.emailSubscription
+    ) {
+      this.setState({ saveEnabled: false, email: email });
+    } else {
+      this.setState({ saveEnabled: true, email: email });
+    }
+  }
+
+  subscriptionChange(data) {
+    const emailSubscription = data.checked;
     if (
       this.state.name === this.props.user.name &&
       this.state.email === this.props.user.emailAddress &&
-      !this.state.emailSubscription === this.props.user.emailSubscription
+      emailSubscription === this.props.user.emailSubscription
     ) {
-      this.setState({ saveEnabled: false });
+      this.setState({
+        saveEnabled: false,
+        emailSubscription: emailSubscription
+      });
     } else {
-      this.setState({ saveEnabled: true });
+      this.setState({
+        saveEnabled: true,
+        emailSubscription: emailSubscription
+      });
     }
   }
 
@@ -80,10 +113,7 @@ class Profile extends Component {
             <input
               placeholder="First Name"
               value={this.state.name}
-              onChange={e => {
-                this.setState({ name: e.target.value });
-                this.checkEnabled();
-              }}
+              onChange={e => this.nameChange(e)}
             />
           </Form.Field>
           <Form.Field>
@@ -91,20 +121,14 @@ class Profile extends Component {
             <input
               placeholder="Last Name"
               value={this.state.email}
-              onChange={e => {
-                this.setState({ email: e.target.value });
-                this.checkEnabled();
-              }}
+              onChange={e => this.emailChange(e)}
             />
           </Form.Field>
           <Form.Field>
             <Checkbox
               label="I agree to the Email Subscription"
               checked={this.state.emailSubscription}
-              onChange={(e, data) => {
-                this.setState({ emailSubscription: data.checked });
-                this.checkEnabled();
-              }}
+              onChange={(e, data) => this.subscriptionChange(data)}
             />
           </Form.Field>
           <Button
