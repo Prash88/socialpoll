@@ -19,28 +19,36 @@ class Home extends Component {
         <div>
           <Header />
           <div className="alignCenter">
-            <Segment>
-              <Dimmer active inverted>
-                <Loader size="large">Loading</Loader>
-              </Dimmer>
-            </Segment>
+            <Dimmer active inverted>
+              <Loader size="large">Loading</Loader>
+            </Dimmer>
           </div>
           <Footer />
         </div>
       );
     } else {
-      const questions = [];
-      this.props.data.allQuestions.forEach(function(question) {
-        questions.push(
-          <li key={question.id}>
-            {question.text}
-          </li>
+      const questions = this.props.data.allQuestions.map(question => {
+        return (
+          <div key={question.id} style={styles.questionSegment}>
+            <Segment>
+              <h4>
+                Question : {question.text}
+              </h4>
+              {question.allOptions.map(option => {
+                return (
+                  <h4 key={option.id}>
+                    {option.text}
+                  </h4>
+                );
+              })}
+            </Segment>
+          </div>
         );
       });
       return (
         <div>
           <Header />
-          <div className="alignCenter">
+          <div>
             {questions}
           </div>
           <Footer />
@@ -50,11 +58,21 @@ class Home extends Component {
   }
 }
 
+const styles = {
+  questionSegment: {
+    paddingTop: 40
+  }
+};
+
 const allQuestions = gql`
   query {
     allQuestions {
       id
       text
+      allOptions {
+        id
+        text
+      }
     }
   }
 `;

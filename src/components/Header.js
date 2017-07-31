@@ -147,7 +147,12 @@ class Header extends Component {
                 this.props.history.push(process.env.PUBLIC_URL + '/');
               }}
             >
-              Social Poll <img src={logo} alt="logo" className="Header-logo" />
+              <div className="headerWrapper">
+                <div style={{ paddingTop: 5 }}>
+                  <h4>Social Poll</h4>
+                </div>
+                <img src={logo} alt="logo" className="Header-logo" />
+              </div>
             </Menu.Item>
           </Menu.Menu>
           <Menu.Menu position="right">
