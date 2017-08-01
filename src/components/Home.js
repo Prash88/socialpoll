@@ -48,6 +48,9 @@ class Home extends Component {
       return (
         <div>
           <Header />
+          <div style={styles.headerView} className="alignCenterHorizontal">
+            <h2>Polls Available</h2>
+          </div>
           <div>
             {questions}
           </div>
@@ -60,6 +63,9 @@ class Home extends Component {
 
 const styles = {
   questionSegment: {
+    paddingTop: 40
+  },
+  headerView: {
     paddingTop: 40
   }
 };
