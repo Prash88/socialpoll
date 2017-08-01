@@ -3,15 +3,29 @@ import React, { Component } from 'react';
 import Header from './Header.js';
 import Footer from './Footer.js';
 import { graphql, gql } from 'react-apollo';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Dimmer, Loader, Segment, Radio, Form } from 'semantic-ui-react';
 
 type Props = {
   user: Object,
   data: Object
 };
 
+type State = {
+  value: string
+};
+
 class Home extends Component {
   props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: ''
+    };
+  }
+
+  handleChange = (e, { value }) => this.setState({ value });
 
   render() {
     if (this.props.data.loading) {
@@ -31,14 +45,22 @@ class Home extends Component {
         return (
           <div key={question.id} style={styles.questionSegment}>
             <Segment>
-              <h4>
-                Question : {question.text}
-              </h4>
+              <Form.Field>
+                <h4>
+                  Question : {question.text}
+                </h4>
+              </Form.Field>
               {question.allOptions.map(option => {
                 return (
-                  <h4 key={option.id}>
-                    {option.text}
-                  </h4>
+                  <Form.Field key={option.id}>
+                    <Radio
+                      label={option.text}
+                      name="radioGroup"
+                      value={option.id}
+                      checked={this.state.value === option.id}
+                      onChange={this.handleChange}
+                    />
+                  </Form.Field>
                 );
               })}
             </Segment>
@@ -52,7 +74,9 @@ class Home extends Component {
             <h2>Polls Available</h2>
           </div>
           <div>
-            {questions}
+            <Form>
+              {questions}
+            </Form>
           </div>
           <Footer />
         </div>
